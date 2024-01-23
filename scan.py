@@ -1,7 +1,7 @@
 import os
 import requests
 import traceback
-from tqdm import tqdm  # 引入进度条库
+from tqdm import tqdm
 import json
 
 requests.packages.urllib3.disable_warnings()
@@ -14,9 +14,9 @@ class GithubClient:
     def verify_credentials(self):
         response = requests.get('https://api.github.com/user', headers=self.headers)
         if response.status_code == 200:
-            return True  # Token is valid
+            return True
         else:
-            return False  # Token is invalid
+            return False
     
     def search_repositories(self, query, page=1, per_page=30):
         url = f"https://api.github.com/search/repositories?q={query}&page={page}&per_page={per_page}"
@@ -26,13 +26,13 @@ class GithubClient:
         else:
             raise Exception(f"Failed to fetch repositories: {r.text}")
 
-def crawl_data_from_url(html_url, data, data_file, api_token):
+def crawl_data_from_url(html_url, data, data_file, access_token):
     split_url = html_url.split('/')
     owner = split_url[3]
     repo = split_url[4]
     url = f"https://api.github.com/repos/{owner}/{repo}"
     
-    headers = {'Authorization': f'token {api_token}'}
+    headers = {'Authorization': f'token {access_token}'}
     response = requests.get(url, headers=headers)
 
     try:
@@ -51,7 +51,7 @@ def crawl_data_from_url(html_url, data, data_file, api_token):
         'number_of_forks': repo_info.get('forks_count'),
         'language': repo_info.get('language')
     }
-    data[html_url] = minimal_info  # 使用原始的HTML URL来作为关键字
+    data[html_url] = minimal_info
 
     with open(data_file, 'w') as file:
         json.dump(data, file)
@@ -59,19 +59,17 @@ def crawl_data_from_url(html_url, data, data_file, api_token):
     return data
 
 def main():
-    root_path = os.path.dirname(os.path.abspath(__file__))  # 将此行移到最前面来定义
+    root_path = os.path.dirname(os.path.abspath(__file__))
     data_file = os.path.join(root_path, 'data.json')
-    data = {}  # Empty dictionary to store data
+    data = {}
     html_urls = []
     
-    # 用户输入API token
-    api_token = input("Enter your GitHub token: ")
-    gc = GithubClient(api_token)
+    access_token = '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'
+    gc = GithubClient(access_token)
 
-    # 验证 Token 是否符合要求
     if not gc.verify_credentials():
         print("Invalid API token. Please check your credentials.")
-        return  # 如果Token不合法，则退出
+        return
 
     start_page = int(input("Enter the start page number: "))
     end_page = int(input("Enter the end page number: "))
@@ -93,10 +91,9 @@ def main():
 
     print(f'[+] html_urls: {len(html_urls)}')
 
-    # 使用 tqdm 来加入进度条
     for url in tqdm(html_urls, desc="Processing URLs"):
         try:
-            data = crawl_data_from_url(url, data, data_file, api_token)
+            data = crawl_data_from_url(url, data, data_file, access_token)
         except Exception as e:
             print(f"Failed to crawl data from URL: {url}. Error: {e}")
 
