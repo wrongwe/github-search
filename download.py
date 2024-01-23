@@ -63,7 +63,7 @@ def main():
         # 使用线程池进行多线程下载，并把它们存储在临时目录中
         with ThreadPoolExecutor(max_workers=5) as executor:
             futures = [executor.submit(download_repo_zip, url, access_token, tmp_dir) for url in download_urls]
-            for future in tqdm(as_completed(futures), total=len(futures), desc="Downloading POCs"):
+            for future in tqdm(as_completed(futures), total=len(futures), desc="Downloading"):
                 pass  # 这里不做任何处理，tqdm 可以显示进度
 
         # 将所有下载的 zip 文件打包到一个文件中
