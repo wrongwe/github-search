@@ -41,8 +41,10 @@ python .\download.py
 
 ##### 如图
 
-![image-20240123152910718](github-search/image-20240123152910718.png)
+![image-20240123152910718](https://github.com/wrongwe/github-search/assets/134288619/b799734d-f322-4cc0-8580-9e72924d98a6)
+
 
 ## 完成后可以得到如下文件
 
-![image-20240123153244239](github-search/image-20240123153244239.png)
+![image-20240123153244239](https://github.com/wrongwe/github-search/assets/134288619/3acd973a-e3a2-4d42-be76-e62e8061edcb)
+
