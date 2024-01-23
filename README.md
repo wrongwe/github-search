@@ -8,7 +8,8 @@
 
 ###### 在图中scan.py添加apiaccess_token的值
 
-![image-20240123154642682](github-search/image-20240123154642682.png)
+<img width="957" alt="image" src="https://github.com/wrongwe/github-search/assets/134288619/d54104e5-fa96-43c3-936d-6250e8a6a172">
+
 
 ##### 在对应路径下命令行模式中打开scan.py文件输入
 
@@ -29,7 +30,8 @@ Enter the keyword you want to search: goby #设置搜索关键词
 
 如图在download.py添加apiaccess_token的值
 
-![image-20240123152749410](github-search/image-20240123152749410.png)
+<img width="960" alt="image" src="https://github.com/wrongwe/github-search/assets/134288619/2830fa83-4523-4c3e-bd3b-c12b319e9f6f">
+
 
 ##### 在对应路径下命令行模式中打开download.py文件输入
 
